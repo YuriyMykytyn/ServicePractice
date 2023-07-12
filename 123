@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <stdbool.h>
 
 // Структура запису аккаунта користувача
 struct Account {
     char name[50];
     char email[50];
     char password[50];
-    float money;
 };
 
 struct Music {
@@ -16,7 +16,8 @@ struct Music {
     float longseconds;
 }; // Структура даних про музику (довжина в секундах і ім'я)
 
-void RegistringAccount() {
+void RegistringAccount() 
+{
     struct Account a;
     char password2[50];
     printf("Вкажіть нікнейм: ");
@@ -45,20 +46,41 @@ void RegistringAccount() {
     } while (strcmp(a.password, password2) != 0);
 }
 
-int main() {
+int main() 
+{
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    int choice;
+
+    int choice = -1;
+
     do {
         printf("Меню:\n");
         printf("1) Створення аккаунта\n");
-                printf("2) Виведення всієї інформації про підписку\n");
+        printf("2) Виведення всієї інформації про підписку\n");
         printf("2) Пошук музики за назвою\n");
         printf("3) Поповнення рахунку\n");
         printf("4) Видалення аккаунта\n");
         printf("5) Вихід з програми\n");
 
+        bool check = true;
+
+    do{
         printf("Виберіть опцію: ");
+
+        // Перевірка на коректне введення
+        if (scanf("%d", &choice) != 1) {
+            printf("\nПомилкове введення. Спробуйте знову\n");
+
+            // Очищення буферу вводу
+            while(getchar() != '\n');
+
+            // Продовження циклу з нового кроку
+            continue;
+        }else{
+            check = false;
+        }
+
+    } while (check);
         scanf("%d", &choice);
 
         switch (choice) {
@@ -75,13 +97,16 @@ int main() {
                 // якась функція;
                 break;
             case 5:
+                // якась функція;
+                break;
+            case 6:
                 printf("Програма завершена.\n");
                 break;
             default:
                 printf("Невірний вибір. Спробуйте ще раз.\n");
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
