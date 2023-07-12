@@ -21,24 +21,31 @@ void RegistringAccount()
     struct Account a;
 
     char password2[50];
-    printf("Вкажіть нікнейм: ");
+
+    fflush(stdin);  // Очищення вхідного буфера
+    
+    printf("\nВкажіть нікнейм: ");
     fgets(a.name, sizeof(a.name), stdin);
+    a.name[strcspn(a.name, "\n")] = '\0';
 
-    printf("Вкажіть електронну пошту користувача: ");
+    printf("\nВкажіть електронну пошту користувача: ");
     fgets(a.email, sizeof(a.email), stdin);
+    a.email[strcspn(a.email, "\n")] = '\0';
 
-    printf("Вкажіть пароль: ");
+    printf("\nВкажіть пароль: ");
     fgets(a.password, sizeof(a.password), stdin);
+    a.password[strcspn(a.password, "\n")] = '\0';
 
-    printf("Повторіть пароль: ");
+    printf("\nПовторіть пароль: ");
     fgets(password2, sizeof(password2), stdin);
+    password2[strcspn(password2, "\n")] = '\0';
 
     do {
         if (strcmp(a.password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
             printf("Аккаунт зареєстровано\n");
         } else {
             printf("Паролі не збігаються\n");
-            printf("Вкажіть пароль: ");
+            printf("\nВкажіть пароль: ");
             fgets(a.password, sizeof(a.password), stdin);
 
             printf("Повторіть пароль: ");
@@ -58,10 +65,10 @@ int main()
         printf("Меню:\n");
         printf("1) Створення аккаунта\n");
         printf("2) Виведення всієї інформації про підписку\n");
-        printf("2) Пошук музики за назвою\n");
-        printf("3) Поповнення рахунку\n");
-        printf("4) Видалення аккаунта\n");
-        printf("5) Вихід з програми\n");
+        printf("3) Пошук музики за назвою\n");
+        printf("4) Поповнення рахунку\n");
+        printf("5) Видалення аккаунта\n");
+        printf("6) Вихід з програми\n");
 
         bool check = true;
 
