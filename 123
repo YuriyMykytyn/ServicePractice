@@ -54,6 +54,55 @@ void RegistringAccount()
     } while (strcmp(a.password, password2) != 0);
 }
 
+void MusicList() { // функція відображення списку музики
+    struct Music a;
+    struct Music b;
+    struct Music c;
+    struct Music d;
+    struct Music e;
+    struct Music f;
+    struct Music g;
+    struct Music h;
+    struct Music m;
+    struct Music n;
+    struct Music o;
+
+    strcpy (a.musicname, "Kalush - Stefania");
+    a.longseconds=179;
+    strcpy (b.musicname, "Kalush - Додому");
+    b.longseconds=216;
+    strcpy (c.musicname, "Kalush - Файна");
+    c.longseconds=156;
+    strcpy (d.musicname, "Kalush feat. Tember Blanche - Калуські вечорниці");
+    d.longseconds=180;
+    strcpy (e.musicname, "Kalush - Зорі");
+    e.longseconds=200;
+    strcpy (f.musicname, "YAKTAK feat. Sobol' - Погляд");
+    f.longseconds=177;
+    strcpy (g.musicname, "Антитіла - Фортеця Бахмут");
+    g.longseconds=199;
+    strcpy (h.musicname, "SadSvit, СТРУКТУРА ЩАСТЯ - Силуети");
+    h.longseconds=173;
+    strcpy (m.musicname, "Без обмежень - Без неї ніяк");
+    m.longseconds=282;
+    strcpy (n.musicname, "alyona alyona - Не втратимо зв'язок");
+    n.longseconds=149;
+    strcpy (o.musicname, "SKOFKA - Чути гімн");
+    o.longseconds=148;
+    printf("Назва і автор пісні                                     Довжина пісні\n");
+    printf("%s                                       %d:%d\n", a.musicname, a.longseconds/60, a.longseconds%60);
+    printf("%s                                         %d:%d\n", b.musicname, b.longseconds/60, b.longseconds%60);
+    printf("%s                                          %d:%d\n", c.musicname, c.longseconds/60, c.longseconds%60);
+    printf("%s        %d:%d\n", d.musicname, d.longseconds/60, d.longseconds%60);
+    printf("%s                                           %d:%d\n", e.musicname, e.longseconds/60, e.longseconds%60);
+    printf("%s                            %d:%d\n", f.musicname, f.longseconds/60, f.longseconds%60);
+    printf("%s                               %d:%d\n", g.musicname, g.longseconds/60, g.longseconds%60);
+    printf("%s                      %d:%d\n", h.musicname, h.longseconds/60, h.longseconds%60);
+    printf("%s                             %d:%d\n", m.musicname, m.longseconds/60, m.longseconds%60);
+    printf("%s                     %d:%d\n", n.musicname, n.longseconds/60, n.longseconds%60);
+    printf("%s                                      %d:%d\n", o.musicname, o.longseconds/60, o.longseconds%60);
+}
+
 int main() 
 {
     SetConsoleCP(1251);
