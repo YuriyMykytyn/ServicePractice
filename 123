@@ -43,7 +43,6 @@ void RegistringAccount()
 
     do {
         if (strcmp(a.password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
-            printf("Аккаунт зареєстровано\n");
         } else {
             printf("Паролі не збігаються\n");
             printf("\nВкажіть пароль: ");
@@ -52,6 +51,7 @@ void RegistringAccount()
             printf("Повторіть пароль: ");
             fgets(password2, sizeof(password2), stdin);
         }
+        printf("Аккаунт зареєстровано\n");
     } while (strcmp(a.password, password2) != 0);
 }
 
