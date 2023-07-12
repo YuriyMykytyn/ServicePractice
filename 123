@@ -14,7 +14,7 @@ struct Account {
 
 struct Music {
     char musicname[50];
-    float longseconds;
+    int longseconds;
 }; // Структура даних про музику (довжина в секундах та ім'я)
 
 void RegistringAccount() 
