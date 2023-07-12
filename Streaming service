@@ -3,7 +3,6 @@
 #include <string.h>
 #include <windows.h>
 #include <stdbool.h>
-#include <math.h>
 
 // Структура запису аккаунта користувача
 struct Account {
@@ -14,7 +13,7 @@ struct Account {
 
 struct Music {
     char musicname[50];
-    int longseconds;
+    float longseconds;
 }; // Структура даних про музику (довжина в секундах та ім'я)
 
 void RegistringAccount() 
@@ -43,6 +42,7 @@ void RegistringAccount()
 
     do {
         if (strcmp(a.password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
+            printf("Аккаунт зареєстровано\n");
         } else {
             printf("Паролі не збігаються\n");
             printf("\nВкажіть пароль: ");
@@ -51,57 +51,67 @@ void RegistringAccount()
             printf("Повторіть пароль: ");
             fgets(password2, sizeof(password2), stdin);
         }
-        printf("Аккаунт зареєстровано\n");
     } while (strcmp(a.password, password2) != 0);
 }
 
-void MusicList() { // функція відображення списку музики
-    struct Music a;
-    struct Music b;
-    struct Music c;
-    struct Music d;
-    struct Music e;
-    struct Music f;
-    struct Music g;
-    struct Music h;
-    struct Music m;
-    struct Music n;
-    struct Music o;
+void Delete_Account(struct Account *a, char password2[50])
+{
+    int choice = -1;
 
-    strcpy (a.musicname, "Kalush - Stefania");
-    a.longseconds=179;
-    strcpy (b.musicname, "Kalush - Додому");
-    b.longseconds=216;
-    strcpy (c.musicname, "Kalush - Файна");
-    c.longseconds=156;
-    strcpy (d.musicname, "Kalush feat. Tember Blanche - Калуські вечорниці");
-    d.longseconds=180;
-    strcpy (e.musicname, "Kalush - Зорі");
-    e.longseconds=200;
-    strcpy (f.musicname, "YAKTAK feat. Sobol' - Погляд");
-    f.longseconds=177;
-    strcpy (g.musicname, "Антитіла - Фортеця Бахмут");
-    g.longseconds=199;
-    strcpy (h.musicname, "SadSvit, СТРУКТУРА ЩАСТЯ - Силуети");
-    h.longseconds=173;
-    strcpy (m.musicname, "Без обмежень - Без неї ніяк");
-    m.longseconds=282;
-    strcpy (n.musicname, "alyona alyona - Не втратимо зв'язок");
-    n.longseconds=149;
-    strcpy (o.musicname, "SKOFKA - Чути гімн");
-    o.longseconds=148;
-    printf("Назва і автор пісні                                     Довжина пісні\n");
-    printf("%s                                       %d:%d\n", a.musicname, a.longseconds/60, a.longseconds%60);
-    printf("%s                                         %d:%d\n", b.musicname, b.longseconds/60, b.longseconds%60);
-    printf("%s                                          %d:%d\n", c.musicname, c.longseconds/60, c.longseconds%60);
-    printf("%s        %d:%d\n", d.musicname, d.longseconds/60, d.longseconds%60);
-    printf("%s                                           %d:%d\n", e.musicname, e.longseconds/60, e.longseconds%60);
-    printf("%s                            %d:%d\n", f.musicname, f.longseconds/60, f.longseconds%60);
-    printf("%s                               %d:%d\n", g.musicname, g.longseconds/60, g.longseconds%60);
-    printf("%s                      %d:%d\n", h.musicname, h.longseconds/60, h.longseconds%60);
-    printf("%s                             %d:%d\n", m.musicname, m.longseconds/60, m.longseconds%60);
-    printf("%s                     %d:%d\n", n.musicname, n.longseconds/60, n.longseconds%60);
-    printf("%s                                      %d:%d\n", o.musicname, o.longseconds/60, o.longseconds%60);
+    printf("\nВи впевненні, що хочете видалити аккаунт? Ця дія є безповоротною! Так - 1 / Ні - 2");
+
+    bool check = true;
+    bool flag = true;
+
+    do {
+        do {
+            printf("\n\nВиберіть опцію: ");
+
+            // Перевірка на коректне введення
+            if (scanf("%d", &choice) != 1) {
+                printf("\nПомилкове введення. Спробуйте знову\n");
+
+                // Очищення буферу вводу
+                while (getchar() != '\n');
+
+                // Продовження циклу з нового кроку
+                continue;
+            } else {
+                check = false;
+            }
+
+            if (choice != 1 && choice != 2) {
+                flag = true;
+                printf("\nПомилкове введення. Спробуйте знову\n");
+            } else {
+                flag = false;  
+            }
+
+        } while (check);
+    } while (flag);
+
+    switch (choice) {
+        case 1:
+            for (int i = 0; i < 50; i++){
+                a->name[i] = 0;
+            }
+            for (int i = 0; i < 50; i++){
+                a->email[i] = 0;
+            }
+            for (int i = 0; i < 50; i++){
+                a->password[i] = 0;
+            }
+            for (int i = 0; i < 50; i++){
+                password2[i] = 0;
+            }
+            printf("\nВаші дані були остаточно видалені!\n\n");
+            break;
+        case 2:
+            printf("\nВи будете направлені у головне меню\n\n");
+            break;
+        default:
+            break;
+    }
 }
 
 int main() 
@@ -110,13 +120,15 @@ int main()
     SetConsoleOutputCP(1251);
 
     int choice = -1;
+    struct Account a;
+    char password2[50];
 
     do {
         printf("Меню:\n");
         printf("1) Створення аккаунта\n");
-        printf("2) Список доступної музики\n");
-        printf("3) Виведення всієї інформації про підписку\n");
-        printf("4) Пошук музики за назвою\n");
+        printf("2) Виведення всієї інформації про підписку\n");
+        printf("3) Пошук музики за назвою\n");
+        printf("4) Поповнення рахунку\n");
         printf("5) Видалення аккаунта\n");
         printf("6) Вихід з програми\n");
 
@@ -145,7 +157,7 @@ int main()
                 RegistringAccount();
                 break;
             case 2:
-                MusicList();
+                // якась функція;
                 break;
             case 3:
                 // якась функція;
@@ -154,7 +166,7 @@ int main()
                 // якась функція;
                 break;
             case 5:
-                // якась функція;
+                Delete_Account(&a, password2);
                 break;
             case 6:
                 printf("Програма завершена.\n");
