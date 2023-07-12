@@ -14,11 +14,12 @@ struct Account {
 struct Music {
     char musicname[50];
     float longseconds;
-}; // Структура даних про музику (довжина в секундах і ім'я)
+}; // Структура даних про музику (довжина в секундах та ім'я)
 
 void RegistringAccount() 
 {
     struct Account a;
+
     char password2[50];
     printf("Вкажіть нікнейм: ");
     fgets(a.name, sizeof(a.name), stdin);
@@ -81,7 +82,6 @@ int main()
         }
 
     } while (check);
-        scanf("%d", &choice);
 
         switch (choice) {
             case 1:
