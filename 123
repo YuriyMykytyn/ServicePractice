@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Структура запису аккаунта користувача
+struct Account {
+    char name[50];
+    char email[50];
+    char password[50];
+    float money;
+};
+
+struct Music {
+    char musicname[50];
+    float longseconds;
+}; // Структура даних про музику (довжина в секундах і ім'я)
+
+void RegistringAccount() {
+    struct Account a;
+    char password2[50];
+    printf("Вкажіть нікнейм: ");
+    fgets(a.name, sizeof(a.name), stdin);
+
+    printf("Вкажіть електронну пошту користувача: ");
+    fgets(a.email, sizeof(a.email), stdin);
+
+    printf("Вкажіть пароль: ");
+    fgets(a.password, sizeof(a.password), stdin);
+
+    printf("Повторіть пароль: ");
+    fgets(password2, sizeof(password2), stdin);
+
+    do {
+        if (strcmp(a.password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
+            printf("Аккаунт зареєстровано\n");
+        } else {
+            printf("Паролі не збігаються\n");
+            printf("Вкажіть пароль: ");
+            fgets(a.password, sizeof(a.password), stdin);
+
+            printf("Повторіть пароль: ");
+            fgets(password2, sizeof(password2), stdin);
+        }
+    } while (strcmp(a.password, password2) != 0);
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choice;
+    do {
+        printf("Меню:\n");
+        printf("1) Створення аккаунта\n");
+                printf("2) Виведення всієї інформації про підписку\n");
+        printf("2) Пошук музики за назвою\n");
+        printf("3) Поповнення рахунку\n");
+        printf("4) Видалення аккаунта\n");
+        printf("5) Вихід з програми\n");
+
+        printf("Виберіть опцію: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                RegistringAccount();
+                break;
+            case 2:
+                // якась функція;
+                break;
+            case 3:
+                // якась функція;
+                break;
+            case 4:
+                // якась функція;
+                break;
+            case 5:
+                // якась функція;
+                break;
+            case 6:
+                printf("Програма завершена.\n");
+                break;
+            default:
+                printf("Невірний вибір. Спробуйте ще раз.\n");
+                break;
+        }
+    } while (choice != 6);
+
+    return 0;
+}
