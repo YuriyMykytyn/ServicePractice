@@ -16,41 +16,40 @@ struct Music {
     float longseconds;
 };
 
-void RegistringAccount() {
-    struct Account a;
+void RegistringAccount(struct Account *a) {
 
     char password2[50];
 
     fflush(stdin);  // Очищення вхідного буфера
 
     printf("\nВкажіть нікнейм: ");
-    fgets(a.name, sizeof(a.name), stdin);
-    a.name[strcspn(a.name, "\n")] = '\0';
+    fgets(a->name, sizeof(a->name), stdin);
+    a->name[strcspn(a->name, "\n")] = '\0';
 
     printf("\nВкажіть електронну пошту користувача: ");
-    fgets(a.email, sizeof(a.email), stdin);
-    a.email[strcspn(a.email, "\n")] = '\0';
+    fgets(a->email, sizeof(a->email), stdin);
+    a->email[strcspn(a->email, "\n")] = '\0';
 
     printf("\nВкажіть пароль: ");
-    fgets(a.password, sizeof(a.password), stdin);
-    a.password[strcspn(a.password, "\n")] = '\0';
+    fgets(a->password, sizeof(a->password), stdin);
+    a->password[strcspn(a->password, "\n")] = '\0';
 
     printf("\nПовторіть пароль: ");
     fgets(password2, sizeof(password2), stdin);
     password2[strcspn(password2, "\n")] = '\0';
 
     do {
-        if (strcmp(a.password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
+        if (strcmp(a->password, password2) == 0) { // Перевірка пароля за допомогою strcmp()
             printf("Аккаунт зареєстровано\n");
         } else {
             printf("Паролі не збігаються\n");
             printf("\nВкажіть пароль: ");
-            fgets(a.password, sizeof(a.password), stdin);
+            fgets(a->password, sizeof(a->password), stdin);
 
             printf("Повторіть пароль: ");
             fgets(password2, sizeof(password2), stdin);
         }
-    } while (strcmp(a.password, password2) != 0);
+    } while (strcmp(a->password, password2) != 0);
 }
 
 void MusicList(const struct Music* songs, int size) {
@@ -140,6 +139,14 @@ void Delete_Account(struct Account *a, char password2[50])
     }
 }
 
+void AccountData(struct Account *a){ // функція виведення даних про аккаунт
+    if (a!=NULL){
+    printf("Нікнейм: %s\n", a->name);
+    printf("Електронна пошта: %s\n", a->email);
+    }
+    else
+    printf("Аккаунт не зареєстровано");
+}
 int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -168,7 +175,7 @@ int main() {
         printf("1) Створення аккаунта\n");
         printf("2) Список доступних пісень\n");
         printf("3) Пошук музики за назвою\n");
-        printf("4) Виведення даних про аккаунт\n"); //не зроблено
+        printf("4) Виведення даних про аккаунт\n");
         printf("5) Видалення аккаунта\n");
         printf("6) Вихід з програми\n");
 
@@ -194,7 +201,7 @@ int main() {
 
         switch (choice) {
             case 1:
-                RegistringAccount();
+                RegistringAccount(&a);
                 break;
             case 2:
                 MusicList(songs, size);
@@ -205,7 +212,7 @@ int main() {
                 MusicSearch(songs, size, target);
                 break;
             case 4:
-                // якась функція;
+                AccountData(&a);
                 break;
             case 5:
                 Delete_Account(&a, password2);
@@ -221,4 +228,3 @@ int main() {
 
     return 0;
 }
-
