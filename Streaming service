@@ -54,7 +54,7 @@ void RegistringAccount() {
 }
 
 void MusicList(const struct Music* songs, int size) {
-    printf("Назва і автор пісні                                     Довжина пісні\n");
+    printf("Назва і автор пісні                               Довжина пісні\n");
     for (int i = 0; i < size; i++) {
         int minutes = (int)songs[i].longseconds / 60;
         int seconds = (int)songs[i].longseconds % 60;
@@ -221,3 +221,4 @@ int main() {
 
     return 0;
 }
+
