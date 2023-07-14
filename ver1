@@ -1,0 +1,120 @@
+} while (check);
+    } while (flag);
+
+    switch (choice) {
+        case 1:
+            for (int i = 0; i < 50; i++) {
+                a->name[i] = 0;
+            }
+            for (int i = 0; i < 50; i++) {
+                a->email[i] = 0;
+            }
+            for (int i = 0; i < 50; i++) {
+                a->password[i] = 0;
+            }
+            for (int i = 0; i < 50; i++) {
+                password2[i] = 0;
+            }
+            printf("\nВаші дані були остаточно видалені!\n\n");
+            break;
+        case 2:
+            printf("\nВи будете направлені у головне меню\n\n");
+            break;
+        default:
+            break;
+    }
+}
+
+void AccountData(struct Account *a){ // функція виведення даних про аккаунт
+    if (a!=NULL){
+    printf("Нікнейм: %s\n", a->name);
+    printf("Електронна пошта: %s\n", a->email);
+    }
+    else
+    printf("Аккаунт не зареєстровано");
+}
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    struct Music songs[] = {
+        { "Kalush - Stefania", 179 },
+        { "Kalush - Додому", 216 },
+        { "Kalush - Файна", 156 },
+        { "Kalush feat. Tember Blanche - Калуські вечорниці", 180 },
+        { "Kalush - Зорі", 200 },
+        { "YAKTAK feat. Sobol' - Погляд", 177 },
+        { "Антитіла - Фортеця Бахмут", 199 },
+        { "SadSvit, СТРУКТУРА ЩАСТЯ - Силуети", 173 },
+        { "Без обмежень - Без неї ніяк", 282 },
+        { "alyona alyona - Не втратимо зв'язок", 149 },
+        { "SKOFKA - Чути гімн", 148 }
+    };
+    int size = sizeof(songs) / sizeof(songs[0]);
+
+    int choice = -1;
+    char target[50];
+    struct Account a;
+    char password2[50];
+
+    do {
+        printf("Меню:\n");
+        printf("1) Створення аккаунта\n");
+        printf("2) Список доступних пісень\n");
+        printf("3) Пошук музики за назвою\n");
+        printf("4) Виведення даних про аккаунт\n");
+        printf("5) Видалення аккаунта\n");
+        printf("6) Змінити Нікнейм\n");
+         printf("7) Вихід з програми\n");
+
+        bool check = true;
+
+        do {
+            printf("Виберіть опцію: ");
+
+            // Перевірка на коректне введення
+            if (scanf("%d", &choice) != 1) {
+                printf("\nПомилкове введення. Спробуйте знову\n");
+
+                // Очищення буферу вводу
+                while (getchar() != '\n');
+
+                // Продовження циклу з нового кроку
+                continue;
+            } else {
+                check = false;
+            }
+
+        } while (check);
+
+        switch (choice) {
+            case 1:
+                RegistringAccount(&a);
+                break;
+            case 2:
+                MusicList(songs, size);
+                break;
+            case 3:
+                printf("Введіть назву пісні або ім'я автора: ");
+                scanf(" %[^\n]", target);
+                MusicSearch(songs, size, target);
+                break;
+            case 4:
+                AccountData(&a);
+                break;
+            case 5:
+                Delete_Account(&a, password2);
+                break;
+            case 6:
+                changeAccount(&a);
+                break;
+                 case 7:
+                printf("Програма завершена.\n");
+                break;
+            default:
+                printf("Невірний вибір. Спробуйте ще раз.\n");
+                break;
+        }
+    } while (choice != 7);
+
+    return 0;
+}
